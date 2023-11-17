@@ -13,7 +13,7 @@ Outputs:
     Value: !Sub aws ecr get-login-password --region ${AWS::Region} | docker login --username AWS --password-stdin ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com
   BuildCommand:
     Value: !Sub docker build -t ${AWS::StackName}-image .
-  TaggingCommand:
+  TagCommand:
     Value: !Sub docker tag ${AWS::StackName}-image:latest ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${AWS::StackName}-repository:latest
   PushCommand:
     Value: !Sub docker push ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${AWS::StackName}-repository:latest
