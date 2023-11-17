@@ -7,6 +7,10 @@ Resources:
     Type: AWS::ECR::Repository
     Properties:
       RepositoryName: !Sub ${AWS::StackName}-repository
+  Cluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: !Sub ${AWS::StackName}-ecs-cluster
 
 Outputs:
   LoginCommand:
