@@ -21,7 +21,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Provision
-        run: aws cloudformation deploy --stack-name ${{ env.CLOUDFORMATION_STACK_NAME }} --template ./template.yml
+        run: aws cloudformation deploy --stack-name ${{ env.CLOUDFORMATION_STACK_NAME }} --template ./template.yml --capabilities CAPABILITY_NAMED_IAM --no-fail-on-empty-changeset --no-cli-pager
       - name: Login
         run: aws cloudformation describe-stacks --stack-name ${{ env.CLOUDFORMATION_STACK_NAME }} --query "Stacks[0].Outputs[?OutputKey=='LoginCommand'].OutputValue" --output text --no-cli-pager | bash
       - name: Build
