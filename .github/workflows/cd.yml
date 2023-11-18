@@ -22,11 +22,3 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Provision
         run: aws cloudformation deploy --stack-name ${{ env.CLOUDFORMATION_STACK_NAME }} --template ./template.yml --capabilities CAPABILITY_NAMED_IAM --no-fail-on-empty-changeset --no-cli-pager
-      - name: Login
-        run: aws cloudformation describe-stacks --stack-name ${{ env.CLOUDFORMATION_STACK_NAME }} --query "Stacks[0].Outputs[?OutputKey=='LoginCommand'].OutputValue" --output text --no-cli-pager | bash
-      - name: Build
-        run: aws cloudformation describe-stacks --stack-name ${{ env.CLOUDFORMATION_STACK_NAME }} --query "Stacks[0].Outputs[?OutputKey=='BuildCommand'].OutputValue" --output text --no-cli-pager | bash
-      - name: Tag
-        run: aws cloudformation describe-stacks --stack-name ${{ env.CLOUDFORMATION_STACK_NAME }} --query "Stacks[0].Outputs[?OutputKey=='TagCommand'].OutputValue" --output text --no-cli-pager | bash
-      - name: Push
-        run: aws cloudformation describe-stacks --stack-name ${{ env.CLOUDFORMATION_STACK_NAME }} --query "Stacks[0].Outputs[?OutputKey=='PushCommand'].OutputValue" --output text --no-cli-pager | bash
